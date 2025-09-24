@@ -221,7 +221,12 @@ public class BinaryTree {
      */
 
     private void replaceValueHelper(Node node, int oldVal, int newVal) {
+    if (node == null) return;
+    if (node.data == oldVal) node.data = newVal;
+    replaceValueHelper(node.left, oldVal, newVal);
+    replaceValueHelper(node.right, oldVal, newVal);
 
+        
         // ADD YOUR CODE HERE -- USE DEPTH FIRST SEARCH OF
         // BINARY TREE (WHICH IS BASED ON RECURSION)
 
@@ -243,6 +248,10 @@ public class BinaryTree {
      */
 
     private int findMinHelper(Node node) {
+        if (node == null) return Integer.MAX_VALUE;
+        int leftMin = findMinHelper(node.left);
+        int rightMin = findMinHelper(node.right);
+    return Math.min(node.data, Math.min(leftMin, rightMin));
 
         // ADD YOUR CODE HERE -- USE DEPTH FIRST SEARCH OF
         // BINARY TREE (WHICH IS BASED ON RECURSION)
@@ -265,7 +274,10 @@ public class BinaryTree {
      */
 
     private int nodesGTHelper(Node node, int val) {
-
+        if (node == null) return 0;
+        int countHere = (node.data > val) ? 1 : 0;
+        return countHere + nodesGTHelper(node.left, val) + nodesGTHelper(node.right, val);
+}
         // ADD YOUR CODE HERE -- USE DEPTH FIRST SEARCH OF
         // BINARY TREE (WHICH IS BASED ON RECURSION)
 
@@ -303,6 +315,13 @@ public class BinaryTree {
     }
 
     private int[] averageHelper(Node n) {
+
+        if (n == null) return new int[]{0, 0};
+    int[] left = averageHelper(n.left);
+    int[] right = averageHelper(n.right);
+    int sum = left[0] + right[0] + n.data;
+    int count = left[1] + right[1] + 1;
+    return new int[]{sum, count};
 
         // ADD YOUR CODE HERE -- USE DEPTH FIRST SEARCH OF
         // BINARY TREE (WHICH IS BASED ON RECURSION)
