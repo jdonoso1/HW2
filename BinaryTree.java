@@ -222,7 +222,8 @@ public class BinaryTree {
 
     private void replaceValueHelper(Node node, int oldVal, int newVal) {
         if (node == null) return;
-        if (node.data == oldVal) node.data = newVal;
+        if (node.data == oldVal)
+            node.data = newVal;
         replaceValueHelper(node.left, oldVal, newVal);
         replaceValueHelper(node.right, oldVal, newVal);
 
@@ -313,9 +314,7 @@ public class BinaryTree {
 
 
     private int[] averageHelper(Node n) {
-        if (n == null) 
-            return new int[]{0, 0};
-        
+        if (n == null) return new int[]{0, 0};
         int[] left = averageHelper(n.left);
         int[] right = averageHelper(n.right);
         int sum = left[0] + right[0] + n.data;
